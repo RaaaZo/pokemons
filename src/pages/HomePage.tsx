@@ -4,6 +4,7 @@ import { Grid, makeStyles, Typography, CircularProgress } from '@material-ui/cor
 import useFetch from '../hooks/useFetch'
 
 import PokemonCard from '../components/PokemonCard'
+import MUIBackdrop from '../components/MUIBackdrop'
 
 const useStyles = makeStyles({
   typographyStyles: {
@@ -53,11 +54,7 @@ const HomePage = () => {
           </Typography>
         </Grid>
 
-        {isLoading && (
-          <Grid justify='center' container>
-            <CircularProgress />
-          </Grid>
-        )}
+        {isLoading && <MUIBackdrop open={isLoading} />}
 
         {error && (
           <Grid justify='center' container>

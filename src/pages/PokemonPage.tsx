@@ -1,19 +1,87 @@
-import React from 'react'
-import { useParams } from 'react-router'
+import React, { useState } from 'react'
+
 import useFetch from '../hooks/useFetch'
 
-interface Params {
-  id: string
+import PokemonCard from '../components/PokemonCard'
+import { Button, Grid, makeStyles, Typography } from '@material-ui/core'
+
+const useStyles = makeStyles({
+  wrapperContainer: {
+    marginTop: 20,
+    padding: 20,
+  },
+  pageContainerStyles: {
+    margin: '20px auto',
+    padding: '0 20px',
+    textAlign: 'center',
+  },
+})
+
+interface FetchData {
+  results: Array<{
+    name: string
+    url: string
+  }>
+
+  next: string
+  previous: string
 }
 
 const PokemonPage: React.FC<{}> = () => {
-  let { id } = useParams<Params>()
+  const classes = useStyles()
 
-  const { data, isLoading, error } = useFetch(`https://pokeapi.co/api/v2/pokemon/${id}`)
+  const [url, setUrl] = useState(`https://pokeapi.co/api/v2/pokemon/?limit=20&offset=0`)
 
-  console.log(data)
+  const { data, isLoading, error } = useFetch<FetchData>(url)
 
-  return <div>pokemon</div>
+  const nextPageHandler = () => {
+    if (data !== null) {
+      setUrl(data.next)
+    }
+  }
+
+  const previousPageHandler = () => {
+    if (data !== null) {
+      setUrl(data.previous)
+    }
+  }
+
+  return (
+    <Grid className={classes.pageContainerStyles} container>
+      {error && (
+        <Grid justify='center' container>
+          <Typography variant='h3'>Error during loading Pokemons</Typography>
+        </Grid>
+      )}
+
+      <Grid className={classes.wrapperContainer} container spacing={1} justify='center'>
+        {!isLoading &&
+          data !== null &&
+          data.results.map((item) => <PokemonCard data={item} key={item.name} />)}
+      </Grid>
+
+      {data !== null && (
+        <Grid container justify='space-around'>
+          <Button
+            variant='outlined'
+            color='secondary'
+            disabled={data.previous === null}
+            onClick={previousPageHandler}
+          >
+            Previous Page
+          </Button>
+          <Button
+            variant='outlined'
+            color='secondary'
+            disabled={data.next === null}
+            onClick={nextPageHandler}
+          >
+            Next Page
+          </Button>
+        </Grid>
+      )}
+    </Grid>
+  )
 }
 
 export default PokemonPage

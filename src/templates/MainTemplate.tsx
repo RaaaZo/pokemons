@@ -6,6 +6,7 @@ const useStyles = makeStyles({
   globalStyles: {
     overflowX: 'hidden',
     backgroundColor: '#f3f3f3',
+    paddingBottom: 40,
   },
   footerStyles: {
     position: 'fixed',

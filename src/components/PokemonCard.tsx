@@ -14,6 +14,7 @@ import { useHistory } from 'react-router'
 import useFetch from '../hooks/useFetch'
 
 import Skeleton from '@material-ui/lab/Skeleton'
+import useToUpperCaseFirstLetter from '../hooks/useToUpperCaseFirstLetter'
 
 const useStyles = makeStyles({
   imageStyles: {
@@ -56,15 +57,7 @@ const PokemonCard: React.FC<Props> = ({ data }) => {
 
   const { data: fetchedData, isLoading, error } = useFetch<FetchData>(data.url)
 
-  const upperCaseFirstLetter = (): string => {
-    if (fetchedData !== null && fetchedData.name.length > 0) {
-      const splittedName = fetchedData.name.split('')
-      const upperCaseLetter = splittedName[0].toUpperCase()
-      splittedName[0] = upperCaseLetter
-      return splittedName.join('')
-    }
-    return ''
-  }
+  const upperCaseFirstLetter = useToUpperCaseFirstLetter()
 
   if (error) {
     return (
@@ -94,12 +87,12 @@ const PokemonCard: React.FC<Props> = ({ data }) => {
                 className={classes.imageStyles}
                 component='img'
                 image={fetchedData.sprites.other['official-artwork'].front_default}
-                title={upperCaseFirstLetter()}
+                title={upperCaseFirstLetter(fetchedData.name)}
               />
               <CardContent>
                 <Grid container justify='space-around'>
                   <Typography gutterBottom variant='h5' component='h2'>
-                    {upperCaseFirstLetter()}
+                    {upperCaseFirstLetter(fetchedData.name)}
                   </Typography>
                   <Typography gutterBottom variant='h5' component='h2'>
                     #{fetchedData.id}

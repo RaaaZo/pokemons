@@ -1,7 +1,8 @@
-import React, { useEffect, useRef, useState } from 'react'
+import React from 'react'
 import { Grid, makeStyles, Typography, CircularProgress } from '@material-ui/core'
 
-import Axios from 'axios'
+import useFetch from '../hooks/useFetch'
+
 import PokemonCard from '../components/PokemonCard'
 
 const useStyles = makeStyles({
@@ -20,40 +21,20 @@ const useStyles = makeStyles({
 })
 
 interface FetchData {
-  name: string
-  url: string
+  results: [
+    {
+      name: string
+      url: string
+    }
+  ]
 }
 
 const HomePage = () => {
   const classes = useStyles()
 
-  const [data, setData] = useState<FetchData[]>([
-    {
-      name: '',
-      url: '',
-    },
-  ])
-
-  const [error, setError] = useState<string>()
-  const [isLoading, setIsLoading] = useState(true)
-
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const {
-          data: { results },
-        } = await Axios.get('https://pokeapi.co/api/v2/pokemon/?limit=8')
-
-        setIsLoading(false)
-        setData(results)
-      } catch (err) {
-        setIsLoading(false)
-        setError(err.response.data)
-      }
-    }
-
-    fetchData()
-  }, [])
+  const { data, isLoading, error } = useFetch<FetchData>(
+    `https://pokeapi.co/api/v2/pokemon/?limit=8`
+  )
 
   return (
     <>
@@ -85,7 +66,9 @@ const HomePage = () => {
         )}
 
         <Grid className={classes.pokemonCardStyles} spacing={1} justify='center' container>
-          {!isLoading && data.map((item) => <PokemonCard data={item} key={item.name} />)}
+          {!isLoading &&
+            data !== null &&
+            data.results.map((item) => <PokemonCard data={item} key={item.name} />)}
         </Grid>
       </Grid>
     </>

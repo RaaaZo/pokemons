@@ -2,13 +2,13 @@ import React from 'react'
 
 import AppBar from '@material-ui/core/AppBar'
 import Toolbar from '@material-ui/core/Toolbar'
-import Button from '@material-ui/core/Button'
 import IconButton from '@material-ui/core/IconButton'
 import MenuIcon from '@material-ui/icons/Menu'
 import { makeStyles } from '@material-ui/core/styles'
 
 import Drawer from './Drawer'
 import { Typography } from '@material-ui/core'
+import { useHistory } from 'react-router'
 
 const useStyles = makeStyles({
   logoStyles: {
@@ -27,6 +27,7 @@ const useStyles = makeStyles({
 
 const Navigation = () => {
   const classes = useStyles()
+  const { push } = useHistory()
   const [open, setOpen] = React.useState(false)
 
   const menuHandler = (): void => {
@@ -37,7 +38,12 @@ const Navigation = () => {
     <>
       <AppBar color='secondary' position='static'>
         <Toolbar className={classes.toolbarStyles}>
-          <Typography className={classes.logoStyles} variant='h4' color='inherit'>
+          <Typography
+            onClick={() => push('/')}
+            className={classes.logoStyles}
+            variant='h4'
+            color='inherit'
+          >
             PokeDex
           </Typography>
 

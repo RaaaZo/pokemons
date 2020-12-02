@@ -42,17 +42,16 @@ const HomePage = () => {
   return (
     <>
       <Grid className={classes.pageContainerStyles} justify='center' container>
-        <Grid item>
+        <Grid xs={12} item>
           <Typography color='secondary' className={classes.typographyStyles} variant='h3'>
-            Lorem ipsum dolor sit amet.
+            Check each of Pokemon!
           </Typography>
         </Grid>
 
-        <Grid item>
+        <Grid xs={12} item>
           <Typography className={classes.typographyStyles} paragraph>
-            Lorem ipsum dolor sit, amet consectetur adipisicing elit. Accusantium dolorem rem
-            officiis totam perferendis beatae, tempore explicabo quisquam ipsa quidem sequi, eum
-            numquam corporis repellat excepturi eos quasi, eligendi enim?
+            This simple page is made for fans of Pokemon. There You can check Your favorites
+            Pokemon, their types, id of Pokedex and more!
           </Typography>
         </Grid>
 

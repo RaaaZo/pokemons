@@ -1,5 +1,5 @@
 import React from 'react'
-import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend } from 'recharts'
+import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip } from 'recharts'
 
 interface Props {
   stats: Array<{
@@ -38,13 +38,13 @@ const Chart: React.FC<Props> = ({ stats }) => {
   return (
     <>
       <BarChart
-        width={500}
+        width={400}
         height={300}
         data={data}
         margin={{
           top: 5,
           right: 30,
-          left: 20,
+          left: 0,
           bottom: 5,
         }}
         barSize={20}

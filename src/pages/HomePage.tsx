@@ -1,10 +1,11 @@
 import React from 'react'
-import { Grid, makeStyles, Typography, CircularProgress } from '@material-ui/core'
+import { Grid, makeStyles, Typography, Button } from '@material-ui/core'
 
 import useFetch from '../hooks/useFetch'
 
 import PokemonCard from '../components/PokemonCard'
 import MUIBackdrop from '../components/MUIBackdrop'
+import { useHistory } from 'react-router'
 
 const useStyles = makeStyles({
   typographyStyles: {
@@ -32,6 +33,7 @@ interface FetchData {
 
 const HomePage = () => {
   const classes = useStyles()
+  const { push } = useHistory()
 
   const { data, isLoading, error } = useFetch<FetchData>(
     `https://pokeapi.co/api/v2/pokemon/?limit=8`
@@ -67,6 +69,10 @@ const HomePage = () => {
             data !== null &&
             data.results.map((item) => <PokemonCard data={item} key={item.name} />)}
         </Grid>
+
+        <Button variant='outlined' color='secondary' onClick={() => push('/pokemon')} size='large'>
+          Search for Pokemon
+        </Button>
       </Grid>
     </>
   )

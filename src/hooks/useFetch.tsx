@@ -3,11 +3,12 @@ import { useState, useEffect } from 'react'
 
 const useFetch = <T,>(url: string) => {
   const [data, setData] = useState<T | null>(null)
-  const [isLoading, setIsLoading] = useState(true)
+  const [isLoading, setIsLoading] = useState(false)
   const [error, setError] = useState()
 
   useEffect(() => {
     let isMounted = true
+    setIsLoading(true)
     const fetchData = async () => {
       try {
         const { data } = await Axios.get(url)

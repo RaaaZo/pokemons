@@ -1,5 +1,5 @@
 import React from 'react'
-import { CssBaseline, Grid, makeStyles, Link } from '@material-ui/core'
+import { CssBaseline, Grid, makeStyles, Link, Paper } from '@material-ui/core'
 import Navigation from '../components/Navigation'
 
 const useStyles = makeStyles({
@@ -19,6 +19,15 @@ const useStyles = makeStyles({
   linkStyles: {
     color: '#fff',
   },
+  paper: {
+    position: 'absolute',
+    top: 0,
+    left: 0,
+    width: '100%',
+    height: '100%',
+    backgroundColor: '#f3f3f3',
+    zIndex: -1,
+  },
 })
 
 interface Props {
@@ -29,6 +38,7 @@ const StyleTemplate: React.FC<Props> = ({ children }) => {
   const classes = useStyles()
   return (
     <Grid className={classes.globalStyles} container>
+      <Paper className={classes.paper} />
       <CssBaseline />
       <Navigation />
       {children}

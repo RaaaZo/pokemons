@@ -48,7 +48,7 @@ const PokemonStats: React.FC<Props> = ({ height, weight, abilities, habitat }) =
   const upperCaseFirstLetter = useToUpperCaseFirstLetter()
 
   return (
-    <Grid className={classes.componentWrapper} sm={10} md={12} item container>
+    <Grid className={classes.componentWrapper} item container>
       {data.map(({ name, value }) => (
         <Grid key={name} xs={6} item>
           <Typography className={classes.headerStyles} align='center' variant='h6'>

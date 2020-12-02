@@ -63,8 +63,6 @@ const Drawer: React.FC<Props> = ({ open, drawerHandler }) => {
         {[
           { name: 'Home', url: '/' },
           { name: 'Pokemon', url: '/pokemon' },
-          { name: 'Evolutions', url: '/evolutions' },
-          { name: 'Locations', url: '/locations' },
         ].map((item, index) => (
           <ListItem
             key={index}

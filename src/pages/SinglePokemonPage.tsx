@@ -4,7 +4,7 @@ import { useHistory, useParams } from 'react-router'
 import useFetch from '../hooks/useFetch'
 
 import Image from 'material-ui-image'
-import { Backdrop, Button, CircularProgress, Grid, makeStyles, Typography } from '@material-ui/core'
+import { Button, Grid, makeStyles, Typography } from '@material-ui/core'
 import Chart from '../components/Chart'
 import PokemonStats from '../components/PokemonStats'
 import useToUpperCaseFirstLetter from '../hooks/useToUpperCaseFirstLetter'
@@ -94,7 +94,7 @@ const SinglePokemonPage: React.FC<{}> = () => {
         </Grid>
       )}
 
-      {data !== null && speciesData !== null && (
+      {data !== null && speciesData !== null && !isLoading && (
         <>
           <Typography className={classes.marginTop} gutterBottom align='center' variant='h4'>
             {upperCaseFirstLetter(data.name)}
@@ -123,6 +123,7 @@ const SinglePokemonPage: React.FC<{}> = () => {
               className={classes.marginTop}
               container
               item
+              sm={10}
               md={6}
               direction='column'
               alignItems='center'

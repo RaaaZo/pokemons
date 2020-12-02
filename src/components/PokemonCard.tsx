@@ -61,7 +61,7 @@ const PokemonCard: React.FC<Props> = ({ data }) => {
 
   if (error) {
     return (
-      <Grid xs={12} sm={5} lg={3} item>
+      <Grid xs={12} sm={6} lg={3} item>
         <Card>
           <CardContent>
             <Typography variant='h5'>Error during loading Pokemon, Try Again!</Typography>
@@ -72,7 +72,7 @@ const PokemonCard: React.FC<Props> = ({ data }) => {
   }
 
   return (
-    <Grid item xs={12} sm={5} lg={3}>
+    <Grid item xs={12} sm={6} lg={3}>
       {isLoading ? (
         <div>
           <Skeleton variant='text' />
